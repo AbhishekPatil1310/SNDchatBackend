@@ -29,6 +29,9 @@ const origin = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "https://sm-dchat-frontend.vercel.app",
+  "https://sm-dchat-frontend-git-main-abhisheks-projects-680a2fd9.vercel.app",
+  "https://sm-dchat-frontend-ijq0kdt0d-abhisheks-projects-680a2fd9.vercel.app"
 ];
 
 // Middleware
@@ -117,3 +120,4 @@ io.on("connection", (socket) => {
 // ---------------- Start Server ---------------- //
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on ${PORT}`));
+
