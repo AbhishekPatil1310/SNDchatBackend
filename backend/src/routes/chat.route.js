@@ -1,17 +1,35 @@
 import express from 'express';
-import { getConversation, postMessage } from '../controller/Chat.controller.js';
-import { verifyToken } from '../middleware/authmiddleware.js';
+import multer from 'multer';
 
+import {
+  getConversation,
+  postMessage,
+  uploadVideoMessage
+} from '../controller/Chat.controller.js';
+
+import { verifyToken } from '../middleware/authmiddleware.js';
 
 const Chatrouter = express.Router();
 
+// Multer for handling video uploads
+const upload = multer({ storage: multer.memoryStorage() });
 
-// GET conversation with a specific user
+// =========================
+// ROUTES
+// =========================
+
+// Get chat with specific user
 Chatrouter.get('/:userId', verifyToken, getConversation);
 
-
-// POST a new message
+// Send a text message
 Chatrouter.post('/:userId', verifyToken, postMessage);
 
+// Send a video message
+Chatrouter.post(
+  '/upload-video/:userId',
+  verifyToken,
+  upload.single("video"),   // Form-data field name
+  uploadVideoMessage
+);
 
 export default Chatrouter;
